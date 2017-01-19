@@ -39,10 +39,6 @@ environment:
       configuration: Release
       WITH_SODIUM: OFF
       WITH_TWEETNACL: ON
-	- platform: Win32, x64
-      configuration: Release, Debug
-      WITH_SODIUM: ON
-      WITH_TWEETNACL: ON
 
 matrix:
   fast_finish: false
