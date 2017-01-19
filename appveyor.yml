@@ -11,7 +11,7 @@ environment:
   MSVCVERSION: "v140"
   MSVCYEAR: "vs2015"
   matrix:
-    - platform: Win32
+    - platform: Win32,
       configuration: Release
       WITH_SODIUM: ON
       WITH_TWEETNACL: ON
@@ -38,6 +38,10 @@ environment:
     - platform: Win32
       configuration: Release
       WITH_SODIUM: OFF
+      WITH_TWEETNACL: ON
+	- platform: Win32, x64
+      configuration: Release, Debug
+      WITH_SODIUM: ON
       WITH_TWEETNACL: ON
 
 matrix:
@@ -50,6 +54,11 @@ init:
   - cmd: reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD /d 0 /f
 
 install:
+  # install CoApp for NuGet package
+  - ps: (new-object net.webclient).DownloadFile('http://coapp.org/files/CoApp.Tools.Powershell.msi', 'C:\CoApp.Tools.Powershell.msi')
+  - ps: Start-Process -FilePath msiexec -ArgumentList /i, 'C:\CoApp.Tools.Powershell.msi', /quiet -Wait
+  - ps: $env:PSModulePath = $env:PSModulePath + ';C:\Program Files (x86)\Outercurve Foundation\Modules'
+  - ps: Import-Module CoApp
   - cmd: if "%Platform%"=="x64" set "CMAKE_GENERATOR=%CMAKE_GENERATOR% Win64"
   - cmd: echo "Generator='%CMAKE_GENERATOR%'"
   - cmd: echo "Platform='%Platform%'"
@@ -78,6 +87,10 @@ after_build:
   - cmd: copy "%SODIUM_LIBRARY_DIR%\libsodium.dll" .
   - cmd: 7z a -y -bd -mx=9 libzmq.zip *.exe *.dll
   - ps: Push-AppveyorArtifact "libzmq.zip" -Filename "libzmq-${env:Platform}-${env:Configuration}.zip"
+  # create NuGet package with CoApp
+  - ps: cd C:\projects\libzmq/builds/nuget
+  - ps: Write-NuGetPackage .\libzmq.autopkg
+  - ps Push-AppveyorArtifact "*.nupkg"
 
 test_script:
   - cmd: cd "%LIBZMQ_BUILDDIR%"
