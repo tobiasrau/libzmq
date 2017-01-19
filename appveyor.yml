@@ -86,7 +86,7 @@ after_build:
   # create NuGet package with CoApp
   - ps: cd C:\projects\libzmq/builds/nuget
   - ps: Write-NuGetPackage .\libzmq.autopkg
-  - ps Push-AppveyorArtifact "*.nupkg"
+  - ps: Push-AppveyorArtifact "*.nupkg"
 
 test_script:
   - cmd: cd "%LIBZMQ_BUILDDIR%"
