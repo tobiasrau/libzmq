@@ -58,9 +58,12 @@ after_build:
   #- cmd: 7z a -y -bd -mx=9 libzmq.zip *.exe *.dll
   #- ps: Push-AppveyorArtifact "libzmq.zip" -Filename "libzmq-${env:Platform}-${env:Configuration}.zip"
   # create NuGet package with CoApp
-  - ps: cd C:\projects\libzmq/builds/nuget
+  - ps: cd C:\projects\libzmq\builds\nuget
   - ps: Write-NuGetPackage .\libzmq.autopkg
-  - ps: Push-AppveyorArtifact "*.nupkg"
+  - ps: Push-AppveyorArtifact libzmq.4.2.2.nupkg
+  - ps: Push-AppveyorArtifact libzmq.redist.4.2.2.nupkg
+  - ps: Push-AppveyorArtifact libzmq.symbols.4.2.2.nupkg
+  - ps: Push-AppveyorArtifact *.nupkg
 
 #test_script:
 #  - cmd: cd "%LIBZMQ_BUILDDIR%"
