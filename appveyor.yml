@@ -12,7 +12,7 @@ environment:
   MSVCYEAR: "vs2015"
   matrix:
     - platform: Win32|x64
-      configuration: Release|Debug
+      configuration: DynRelease|DynDebug
 
 
 matrix:
@@ -33,13 +33,13 @@ before_build:
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\libzmq
   #- cmd: md "%LIBZMQ_BUILDDIR%"
   - cd "%LIBZMQ_BUILDDIR%"
-  - cmd: cmake -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -D WITH_SODIUM=OFF -D WITH_TWEETNACL=OFF -G "%CMAKE_GENERATOR%" "%APPVEYOR_BUILD_FOLDER%"
+  #- cmd: cmake -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -D WITH_SODIUM=OFF -D WITH_TWEETNACL=OFF -G "%CMAKE_GENERATOR%" "%APPVEYOR_BUILD_FOLDER%"
 
   # - cmd: C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe ZeroMQ.sln /build /prj=libzmq /cfg="DynDebug|Win32,DynRelease|Win32,DynDebug|Win32,DynRelease|Win32"
 
 build:
   parallel: true
-  project: C:\projects\build_libzmq\ZeroMQ.sln
+  project: C:\projects\build_libzmq\builds\msvc\vs2015\libzmq.sln
   verbosity: minimal
 
 after_build:
