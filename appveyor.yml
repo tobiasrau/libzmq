@@ -35,10 +35,10 @@ before_build:
   - cd "%LIBZMQ_BUILDDIR%"
   #- cmd: cmake -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -D WITH_SODIUM=OFF -D WITH_TWEETNACL=OFF -G "%CMAKE_GENERATOR%" "%APPVEYOR_BUILD_FOLDER%"
   - cmd: cd C:\projects\libzmq\builds\msvc\vs2015\
-  - cmd: "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" libzmq.sln /p:Configuration=DynRelease /p:Platform=x64
-  - cmd: "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" libzmq.sln /p:Configuration=DynDebug /p:Platform=x64
-  - cmd: "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" libzmq.sln /p:Configuration=DynRelease /p:Platform=Win32
-  - cmd: "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" libzmq.sln /p:Configuration=DynDebug /p:Platform=Win32
+  - cmd: C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=x64
+  - cmd: C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe libzmq.sln /p:Configuration=DynDebug /p:Platform=x64
+  - cmd: C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=Win32
+  - cmd: C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe libzmq.sln /p:Configuration=DynDebug /p:Platform=Win32
   # - cmd: C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe ZeroMQ.sln /build /prj=libzmq /cfg="DynDebug|Win32,DynRelease|Win32,DynDebug|Win32,DynRelease|Win32"
 
 build:
