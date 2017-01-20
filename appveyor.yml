@@ -36,10 +36,9 @@ before_build:
   #- cmd: cmake -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -D WITH_SODIUM=OFF -D WITH_TWEETNACL=OFF -G "%CMAKE_GENERATOR%" "%APPVEYOR_BUILD_FOLDER%"
   - cmd: cd C:\projects\libzmq\builds\msvc\vs2015\
   - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=x64
-  #- cmd: C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=x64
-  #- cmd: C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe libzmq.sln /p:Configuration=DynDebug /p:Platform=x64
-  #- cmd: C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=Win32
-  #- cmd: C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe libzmq.sln /p:Configuration=DynDebug /p:Platform=Win32
+  - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynDebug /p:Platform=x64
+  - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=Win32
+  - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynDebug /p:Platform=Win32
   # - cmd: C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe ZeroMQ.sln /build /prj=libzmq /cfg="DynDebug|Win32,DynRelease|Win32,DynDebug|Win32,DynRelease|Win32"
 
 build:
@@ -54,16 +53,16 @@ after_build:
   - ps: $env:PSModulePath = $env:PSModulePath + ';C:\Program Files (x86)\Outercurve Foundation\Modules'
   - ps: Import-Module CoApp
 
-  - cmd: cd %LIBZMQ_BUILDDIR%\bin\%Configuration%"
-  - cmd: copy "%SODIUM_LIBRARY_DIR%\libsodium.dll" .
-  - cmd: 7z a -y -bd -mx=9 libzmq.zip *.exe *.dll
-  - ps: Push-AppveyorArtifact "libzmq.zip" -Filename "libzmq-${env:Platform}-${env:Configuration}.zip"
+  #- cmd: cd %LIBZMQ_BUILDDIR%\bin\%Configuration%"
+  #- cmd: copy "%SODIUM_LIBRARY_DIR%\libsodium.dll" .
+  #- cmd: 7z a -y -bd -mx=9 libzmq.zip *.exe *.dll
+  #- ps: Push-AppveyorArtifact "libzmq.zip" -Filename "libzmq-${env:Platform}-${env:Configuration}.zip"
   # create NuGet package with CoApp
   - ps: cd C:\projects\libzmq/builds/nuget
   - ps: Write-NuGetPackage .\libzmq.autopkg
   - ps: Push-AppveyorArtifact "*.nupkg"
 
-test_script:
-  - cmd: cd "%LIBZMQ_BUILDDIR%"
-  - cmd: ctest -C "%Configuration%" -V
+#test_script:
+#  - cmd: cd "%LIBZMQ_BUILDDIR%"
+#  - cmd: ctest -C "%Configuration%" -V
 
