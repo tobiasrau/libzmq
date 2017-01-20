@@ -39,7 +39,7 @@ before_build:
 
 build:
   parallel: true
-  project: C:\projects\build_libzmq\builds\msvc\vs2015\libzmq.sln
+  project: C:\projects\libzmq\builds\msvc\vs2015\libzmq.sln
   verbosity: minimal
 
 after_build:
