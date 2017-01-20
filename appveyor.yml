@@ -31,11 +31,11 @@ clone_folder: C:\projects\libzmq
 
 before_build:
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\libzmq
-  - cmd: md "%LIBZMQ_BUILDDIR%"
+  #- cmd: md "%LIBZMQ_BUILDDIR%"
   - cd "%LIBZMQ_BUILDDIR%"
   - cmd: cmake -D CMAKE_C_FLAGS_RELEASE="/MT" -D CMAKE_C_FLAGS_DEBUG="/MTd" -D WITH_SODIUM=OFF -D WITH_TWEETNACL=OFF -G "%CMAKE_GENERATOR%" "%APPVEYOR_BUILD_FOLDER%"
 
-  # -cmd: C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe ZeroMQ.sln /build /prj=libzmq /cfg="DynDebug|Win32,DynRelease|Win32,DynDebug|Win32,DynRelease|Win32"
+  # - cmd: C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe ZeroMQ.sln /build /prj=libzmq /cfg="DynDebug|Win32,DynRelease|Win32,DynDebug|Win32,DynRelease|Win32"
 
 build:
   parallel: true
