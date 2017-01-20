@@ -6,48 +6,54 @@ configurations {
 };
 
 nuget{
-  nuspec{
-    id = libzmq;
-    version : 4.1.0-alpha;
-    title: ZMQ - Code Connected;
-    authors: { zeromq };
-    owners: { phreed, jgoz };
-    licenseUrl: "https://www.gnu.org/licenses/lgpl.html";
-    projectUrl: "http://www.zeromq.org/";
-    iconUrl: "http://www.zeromq.org/local--files/admin:css/logo.gif";
-    requireLicenseAcceptance: false;
-    summary: Code Connected;
-    description: @" 
-ZeroMQ \zeromq\:
-- Connect your code in any language, on any platform.
-- Carries messages across inproc, IPC, TCP, TPIC, multicast.
-- Smart patterns like pub-sub, push-pull, and router-dealer.
-- High-speed asynchronous I/O engines, in a tiny library.
-- Backed by a large and active open source community.
-- Supports every modern language and platform.
-- Build any architecture: centralized, distributed, small, or large.
-- Free software with full commercial support.";
-    releaseNotes: "Made a NuGet package.";
-    copyright: Copyright 2012 iMatix Corporation and Contributors;
-    tags: {0mq, zeromq, nuget, native; }
-  }
+	nuspec{
+		id = libzmq;
+		version : 4.2.2;
+		title: ZMQ - Code Connected;
+		authors: { zeromq };
+		owners: { rauts };
+		licenseUrl: "https://www.gnu.org/licenses/lgpl.html";
+		projectUrl: "http://www.zeromq.org/";
+		iconUrl: "http://www.zeromq.org/local--files/admin:css/logo.gif";
+		requireLicenseAcceptance: false;
+		summary: @"Code Connected";
+		description: @"
+		ZeroMQ :
+		- Connect your code in any language, on any platform.
+		- Carries messages across inproc, IPC, TCP, TPIC, multicast.
+		- Smart patterns like pub-sub, push-pull, and router-dealer.
+		- High-speed asynchronous I/O engines, in a tiny library.
+		- Backed by a large and active open source community.
+		- Supports every modern language and platform.
+		- Build any architecture: centralized, distributed, small, or large.
+		- Free software with full commercial support.";
 
-  files{
-    include: { "..\..\include\*" };
-    docs: { "..\..\doc\*.txt" };
+		releaseNotes: "Made a NuGet package.";
+		copyright: Copyright 2012 iMatix Corporation and Contributors;
+		tags: {0mq, zeromq, nuget, native };
+	};
 
-    ("v140,v120,v110,v100", "Win32,x64", "Debug,Release") => {
-		[${0},${1},${2}] {
-       lib: ..\..\bin\${1}\${2}\${0}\dynamic\libzmq.lib;     
-       symbols: ..\..\bin\${1}\${2}\${0}\dynamic\libzmq.pdb;
-	   bin: ..\..\bin\${1}\${2}\${0}\dynamic\libzmq.dll;
-	   }
-    };    
+	files{
+		include: {
+			"..\..\include\*.h"
+		};
+		docs: {
+			"..\..\doc\*.txt"
+		};
 
-    targets{
-       Defines += HAS_CPP_ZMQ_SDK;
-    }
-  }
-}
+		("v140,v120,v110,v100", "Win32,x64", "Debug,Release", "dynamic") => {
+			[${0},${1},${2},${3}] {
+				lib:     ..\..\bin\${1}\${2}\${0}\${3}\libzmq.lib;     
+				symbols: ..\..\bin\${1}\${2}\${0}\${3}\libzmq.pdb;
+				bin:     ..\..\bin\${1}\${2}\${0}\${3}\libzmq.dll;
+			}
+		};    
+	};
+
+	targets{
+		Defines += HAS_CPP_ZMQ_SDK;
+	    Defines += ZMQ_BUILD_AS_DLL;
+	};
+};
 
 
