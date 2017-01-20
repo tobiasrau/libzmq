@@ -1,3 +1,10 @@
+configurations {
+	Toolset {
+		key : "PlatformToolset";
+		choices: { v140, v120, v110, v100 };
+	};
+};
+
 nuget{
   nuspec{
     id = libzmq;
@@ -26,22 +33,16 @@ ZeroMQ \zeromq\:
   }
 
   files{
-    #defines {
-       SDK_ROOT = ..\..\;
-       SDK_2010 = ..\msvc\;
-    }  
-    include: { "${SDK_ROOT}include\*" };
-    docs: { "${SDK_ROOT}doc\*.txt" };
+    include: { "..\..\include\*" };
+    docs: { "..\..\doc\*.txt" };
 
-    [x64,v100,debug] {
-       lib: ${SDK_2010}Debug\libzmq.lib;     
-       symbols: ${SDK_2010}Debug\libzmq.pdb;     
-    }    
-
-    [x64,v100,release] {
-       lib: ${SDK_2010}Release\libzmq.lib;     
-       bin: ${SDK_2010}..\..\lib\libzmq.dll; 
-    }    
+    ("v140,v120,v110,v100", "Win32,x64", "Debug,Release") => {
+		[${0},${1},${2}] {
+       lib: ..\..\bin\${1}\${2}\${0}\dynamic\libzmq.lib;     
+       symbols: ..\..\bin\${1}\${2}\${0}\dynamic\libzmq.pdb;
+	   bin: ..\..\bin\${1}\${2}\${0}\dynamic\libzmq.dll;
+	   }
+    };    
 
     targets{
        Defines += HAS_CPP_ZMQ_SDK;
