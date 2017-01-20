@@ -7,7 +7,7 @@ configurations {
 
 nuget{
 	nuspec{
-		id = libzmq;
+		id = libzmq-nightly;
 		version : 4.2.2;
 		title: ZMQ - Code Connected;
 		authors: { zeromq };
@@ -43,11 +43,16 @@ nuget{
 
 		("v140,v120,v110,v100", "Win32,x64", "Debug,Release", "dynamic") => {
 			[${0},${1},${2},${3}] {
-				lib:     ..\..\bin\${1}\${2}\${0}\${3}\libzmq.lib;     
+				lib:     ..\..\bin\${1}\${2}\${0}\${3}\libzmq.lib;
 				symbols: ..\..\bin\${1}\${2}\${0}\${3}\libzmq.pdb;
 				bin:     ..\..\bin\${1}\${2}\${0}\${3}\libzmq.dll;
 			}
-		};    
+		};  
+		("v140,v120,v110,v100", "Win32,x64", "Debug,Release", "static,ltcg") => {
+			[${0},${1},${2},${3}] {
+				lib:     ..\..\bin\${1}\${2}\${0}\${3}\libzmq.lib;     
+			}
+		};  
 	};
 
 	targets{
