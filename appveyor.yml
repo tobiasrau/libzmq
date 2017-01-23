@@ -34,9 +34,9 @@ clone_folder: C:\projects\libzmq
 build_script:
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\libzmq\bin
     # get cpp headers
-  - cmd cd C:\projects\libzmq
-  - cmd git submodule init
-  - cmd git submodule update
+  - cmd: cd C:\projects\libzmq
+  - cmd: git submodule init
+  - cmd: git submodule update
   - cmd: cd C:\projects\libzmq\builds\msvc\vs2015\
     # build v140
     # build dynamic
