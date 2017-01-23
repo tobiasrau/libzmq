@@ -62,6 +62,14 @@ after_build:
   - ps: Write-NuGetPackage .\libzmq.autopkg
   - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
+deploy:
+  provider: NuGet
+  api_key:
+    secure: kyNQKzUrAh5MncQ0UEIOj6hkNxxbGnNLGSW3Hlbi9HCG/+wOvSSDkz7qD+hT7lEf
+  skip_symbols: false
+  artifact: /.*\.nupkg/
+
+
 #test_script:
 #  - cmd: cd "%LIBZMQ_BUILDDIR%"
 #  - cmd: ctest -C "%Configuration%" -V
