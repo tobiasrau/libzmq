@@ -9,33 +9,25 @@ nuget{
 	nuspec{
 		id = libzmq-nightly;
 		version : 4.2.2.3;
-		title: ZMQ - Code Connected;
+		title: libzmq nightly build;
 		authors: { zeromq };
 		owners: { rauts };
 		licenseUrl: "https://www.gnu.org/licenses/lgpl.html";
 		projectUrl: "http://www.zeromq.org/";
 		iconUrl: "http://www.zeromq.org/local--files/admin:css/logo.gif";
 		requireLicenseAcceptance: false;
-		summary: @"Code Connected";
-		description: @"
-		ZeroMQ :
-		- Connect your code in any language, on any platform.
-		- Carries messages across inproc, IPC, TCP, TPIC, multicast.
-		- Smart patterns like pub-sub, push-pull, and router-dealer.
-		- High-speed asynchronous I/O engines, in a tiny library.
-		- Backed by a large and active open source community.
-		- Supports every modern language and platform.
-		- Build any architecture: centralized, distributed, small, or large.
-		- Free software with full commercial support.";
+		summary: @" libzmq nightly NuGet";
+		description: @"Complete Nuget package of libzmq with libsodium and C++ headers for MSVC versions v140, v120, v110"
 
 		releaseNotes: "Made a NuGet package.";
 		copyright: Copyright 2012 iMatix Corporation and Contributors;
-		tags: {0mq, zeromq, nuget, native };
+		tags: {0mq, zeromq, cppzmq, libsodium, nuget, native };
 	};
 
 	files{
 		include: {
 			"..\..\include\*.h"
+			"..\..\include\cppzmq\*.hpp"
 		};
 		docs: {
 			"..\..\doc\*.txt"
