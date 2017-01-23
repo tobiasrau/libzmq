@@ -111,7 +111,7 @@ before_build:
 
 
 
-#build:
+build:
   parallel: true
   project: C:\projects\libzmq\builds\msvc\vs2015\libzmq.sln
   verbosity: minimal
