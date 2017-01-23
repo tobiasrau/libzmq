@@ -17,7 +17,7 @@ nuget{
 		iconUrl: "http://www.zeromq.org/local--files/admin:css/logo.gif";
 		requireLicenseAcceptance: false;
 		summary: @" libzmq nightly NuGet";
-		description: @"Complete Nuget package of libzmq with libsodium and C++ headers for MSVC versions v140, v120, v110"
+		description: @"Complete Nuget package of libzmq with libsodium and C++ headers for MSVC versions v140, v120, v110";
 
 		releaseNotes: "Made a NuGet package.";
 		copyright: Copyright 2012 iMatix Corporation and Contributors;
@@ -26,11 +26,11 @@ nuget{
 
 	files{
 		include: {
-			"..\..\include\*.h"
-			"..\..\include\cppzmq\*.hpp"
+			"..\..\include\*.h";
+			"..\..\include\cppzmq\*.hpp";
 		};
 		docs: {
-			"..\..\doc\*.txt"
+			"..\..\doc\*.txt";
 		};
 
 		("v140,v120,v110", "Win32,x64", "Debug", "dynamic") => {
