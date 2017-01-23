@@ -68,7 +68,6 @@ before_build:
   - cmd: MSBuild.exe libzmq.sln /p:Configuration=LtcgDebug /p:Platform=x64 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - cmd: MSBuild.exe libzmq.sln /p:Configuration=LtcgRelease /p:Platform=Win32 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - cmd: MSBuild.exe libzmq.sln /p:Configuration=LtcgDebug /p:Platform=Win32 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-	
 
 
 #build:
