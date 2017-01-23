@@ -33,9 +33,13 @@ clone_folder: C:\projects\libzmq
 
 build_script:
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\libzmq\bin
-  # build v140
+    # get cpp headers
+  - cmd cd C:\projects\libzmq
+  - cmd git submodule init
+  - cmd git submodule update
   - cmd: cd C:\projects\libzmq\builds\msvc\vs2015\
-  # build dynamic
+    # build v140
+    # build dynamic
   - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=x64 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynDebug /p:Platform=x64 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=Win32 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
