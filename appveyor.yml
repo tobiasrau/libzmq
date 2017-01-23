@@ -1,5 +1,9 @@
 version: build-{build}
 
+branches:
+  only:
+  - nuget
+
 clone_depth: 1
 
 skip_tags: true
@@ -11,8 +15,8 @@ environment:
   MSVCVERSION: "v140"
   MSVCYEAR: "vs2015"
   matrix:
-    - platform: x64
-      configuration: DynRelease
+    - platform: all
+      configuration: all
 
 
 matrix:
@@ -27,12 +31,12 @@ install:
 
 clone_folder: C:\projects\libzmq
 
-before_build:
+build_script:
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\libzmq\bin
   # build v140
   - cmd: cd C:\projects\libzmq\builds\msvc\vs2015\
   # build dynamic
-  # This is build in the build section - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=x64 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=x64 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynDebug /p:Platform=x64 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynRelease /p:Platform=Win32 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - cmd: MSBuild.exe libzmq.sln /p:Configuration=DynDebug /p:Platform=Win32 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
@@ -90,10 +94,10 @@ before_build:
   - cmd: MSBuild.exe libzmq.sln /p:PlatformToolset=v110 /p:Configuration=LtcgDebug /p:Platform=Win32 /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 
-build:
-  parallel: true
-  project: C:\projects\libzmq\builds\msvc\vs2015\libzmq.sln
-  verbosity: minimal
+#build:
+#  parallel: true
+#  project: C:\projects\libzmq\builds\msvc\vs2015\libzmq.sln
+#  verbosity: minimal
 
 after_build:
   # install CoApp for NuGet package
