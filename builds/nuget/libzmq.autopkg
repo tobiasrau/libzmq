@@ -8,7 +8,7 @@ configurations {
 nuget{
 	nuspec{
 		id = libzmq-nightly;
-		version : 4.2.2.1;
+		version : 4.2.2.2;
 		title: ZMQ - Code Connected;
 		authors: { zeromq };
 		owners: { rauts };
