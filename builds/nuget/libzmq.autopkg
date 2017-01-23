@@ -1,14 +1,14 @@
 configurations {
 	Toolset {
 		key : "PlatformToolset";
-		choices: { v140, v120, v110, v100 };
+		choices: { v140, v120, v110 };
 	};
 };
 
 nuget{
 	nuspec{
 		id = libzmq-nightly;
-		version : 4.2.2;
+		version : 4.2.2.0;
 		title: ZMQ - Code Connected;
 		authors: { zeromq };
 		owners: { rauts };
