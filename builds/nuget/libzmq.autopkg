@@ -8,7 +8,7 @@ configurations {
 nuget{
 	nuspec{
 		id = libzmq-nightly;
-		version : 4.2.2.0;
+		version : 4.2.2.1;
 		title: ZMQ - Code Connected;
 		authors: { zeromq };
 		owners: { rauts };
@@ -57,7 +57,7 @@ nuget{
 
 	targets{
 		Defines += HAS_CPP_ZMQ_SDK;
-	    Defines += ZMQ_BUILD_AS_DLL;
+		Defines += ZMQ_BUILD_AS_DLL;
 	};
 };
 
