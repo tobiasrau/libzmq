@@ -31,7 +31,7 @@ install:
   - cmd: git clone --branch stable https://github.com/jedisct1/libsodium.git
   - cmd: cd C:\projects\libsodium\builds\msvc\vs2015\
   # build libsodium in all configurations
-  - cmd: FOR %C IN (DynRelease DynDebug StaticRelease StaticDebug LtcgRelease LtcgDebug) DO FOR %P IN (Win32 x64) DO MSBuild.exe libsodium.sln /p:Configuration=%C /p:Platform=%P /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - cmd: FOR %%C IN (DynRelease DynDebug StaticRelease StaticDebug LtcgRelease LtcgDebug) DO FOR %%P IN (Win32 x64) DO MSBuild.exe libsodium.sln /p:Configuration=%C /p:Platform=%P /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 
 
