@@ -31,7 +31,7 @@ install:
   - cmd: git clone --branch stable https://github.com/jedisct1/libsodium.git
   - cmd: cd C:\projects\libsodium\builds\msvc\vs2015\
   # build libsodium in all configurations
-  - cmd: for %C in (DynRelease DynDebug StaticRelease StaticDebug LtcgRelease LtcgDebug) do (for %P in (Win32 x64) do (MSBuild.exe libsodium.sln /p:Configuration=%C /p:Platform=%P /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"))
+  - cmd: for %C in (DynRelease DynDebug StaticRelease StaticDebug LtcgRelease LtcgDebug) do (for %F in (Win32 x64) do (MSBuild.exe libsodium.sln /p:Configuration=%C /p:Platform=%F /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"))
 
 
 
@@ -45,7 +45,7 @@ build_script:
   - cmd: git submodule update
   - cmd: cd C:\projects\libzmq\builds\msvc\vs2015\
   # build libzmq in all configurations
-  - cmd: for %C in (DynRelease DynDebug StaticRelease StaticDebug LtcgRelease LtcgDebug) do (for %P in (Win32 x64) do (MSBuild.exe libzmq.sln /t:libzmq /p:Configuration=%C /p:Platform=%P /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"))
+  - cmd: for %C in (DynRelease DynDebug StaticRelease StaticDebug LtcgRelease LtcgDebug) do (for %F in (Win32 x64) do (MSBuild.exe libzmq.sln /t:libzmq /p:Configuration=%C /p:Platform=%F /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"))
 
 after_build:
   # install CoApp for NuGet package
