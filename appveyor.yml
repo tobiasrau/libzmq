@@ -26,16 +26,15 @@ init:
   - msbuild /version
   - cmd: reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v UserAuthentication /t REG_DWORD /d 0 /f
 
+clone_folder: C:\projects\libzmq
+
 install:
   - cmd: cd C:\projects
   - cmd: git clone --branch stable https://github.com/jedisct1/libsodium.git
   - cmd: cd C:\projects\libsodium\builds\msvc\vs2015\
   # build libsodium in all configurations
-  - cmd: for %%A in (DynRelease DynDebug StaticRelease StaticDebug LtcgRelease LtcgDebug) do (for %%B in (Win32 x64) do (MSBuild.exe libsodium.sln /m:2 /p:Configuration=%%A /p:Platform=%%B /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"))
+  - cmd: for %%A in (DynRelease DynDebug StaticRelease StaticDebug LtcgRelease LtcgDebug) do (for %%B in (Win32 x64) do (for %%C in (v140 v120 v110) do (MSBuild.exe libsodium.sln /m:2 /p:Configuration=%%A /p:Platform=%%B /p:PlatformToolset=%%C /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll")))
 
-
-
-clone_folder: C:\projects\libzmq
 
 build_script:
   - cmd: set LIBZMQ_BUILDDIR=C:\projects\libzmq\bin
@@ -45,7 +44,7 @@ build_script:
   - cmd: git submodule update
   - cmd: cd C:\projects\libzmq\builds\msvc\vs2015\
   # build libzmq in all configurations
-  - cmd: for %%A in (DynRelease DynDebug StaticRelease StaticDebug LtcgRelease LtcgDebug) do (for %%B in (Win32 x64) do (MSBuild.exe libzmq.sln /m:2 /t:libzmq /p:Configuration=%%A /p:Platform=%%B /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"))
+  - cmd: for %%A in (DynRelease DynDebug StaticRelease StaticDebug LtcgRelease LtcgDebug) do (for %%B in (Win32 x64) do (for %%C in (v140 v120 v110) do (MSBuild.exe libzmq.sln /m:2 /t:libzmq /p:Configuration=%%A /p:Platform=%%B /p:PlatformToolset=%%C /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll")))
 
 after_build:
   # install CoApp for NuGet package
